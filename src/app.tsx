@@ -13,7 +13,7 @@ const tasks = [
   },
 ];
 
-export default function App() {
+export function App() {
   return (
     <div>
       <h1>Doo Now</h1>

@@ -20,7 +20,7 @@ export default function App() {
       <ul>
         {tasks.map((task) => {
           return (
-            <li>
+            <li key={task.id}>
               <h2>{task.title}</h2>
               <p>{task.completed}</p>
               <p>Date Time: {task.date.toLocaleString()}</p>

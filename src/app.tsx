@@ -19,13 +19,15 @@ export default function App() {
       <header className="border-b flex justify-center py-2">
         <h1>Doo Now</h1>
       </header>
-      <ul>
+      <ul className="p-10 space-y-5">
         {tasks.map((task) => {
           return (
-            <li key={task.id}>
+            <li
+              key={task.id}
+              className="border flex gap-5 px-5 rounded-sm py-2"
+            >
+              <input type="radio" name="completed" id="completed" />
               <h2>{task.title}</h2>
-              <p>{task.completed}</p>
-              <p>Date Time: {task.date.toLocaleString()}</p>
             </li>
           );
         })}

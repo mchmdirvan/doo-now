@@ -16,7 +16,9 @@ const tasks = [
 export default function App() {
   return (
     <div>
-      <h1>Doo Now</h1>
+      <header className="border-b flex justify-center py-2">
+        <h1>Doo Now</h1>
+      </header>
       <ul>
         {tasks.map((task) => {
           return (

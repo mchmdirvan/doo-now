@@ -1,3 +1,5 @@
+import Button from "./components/button";
+
 const tasks = [
   {
     id: 1,
@@ -29,6 +31,7 @@ export default function App() {
             >
               <input type="checkbox" name="completed" id="completed" />
               <h2>{task.title}</h2>
+              <Button>Delete</Button>
             </li>
           );
         })}

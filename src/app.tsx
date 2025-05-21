@@ -76,8 +76,9 @@ export default function App() {
     setCount(count - 1);
   }
 
-  function removeTask() {
-    console.log("Hello");
+  function removeTask(id: number) {
+    const updatedTask = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTask);
   }
 
   return (
@@ -97,7 +98,7 @@ export default function App() {
       </div>
 
       <ul className="p-10 space-y-5 flex flex-col items-center">
-        {initialTasks.map((task) => {
+        {tasks.map((task) => {
           return (
             <li
               key={task.id}
@@ -110,7 +111,7 @@ export default function App() {
                   <p>{task.date.toLocaleString()}</p>
                 </div>
               </div>
-              <Button onClick={removeTask}>Delete</Button>
+              <Button onClick={() => removeTask(task.id)}>Delete</Button>
             </li>
           );
         })}

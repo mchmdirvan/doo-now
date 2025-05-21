@@ -5,13 +5,61 @@ const tasks = [
     id: 1,
     title: "Breakfast",
     completed: true,
-    date: new Date("2025-05-11 7:00"),
+    date: new Date("2025-05-11 07:00"),
   },
   {
     id: 2,
     title: "Cleaning The Room",
     completed: false,
     date: new Date("2025-05-11 08:00"),
+  },
+  {
+    id: 3,
+    title: "Morning Exercise",
+    completed: false,
+    date: new Date("2025-05-11 08:30"),
+  },
+  {
+    id: 4,
+    title: "Check Emails",
+    completed: false,
+    date: new Date("2025-05-11 09:00"),
+  },
+  {
+    id: 5,
+    title: "Team Meeting",
+    completed: false,
+    date: new Date("2025-05-11 10:00"),
+  },
+  {
+    id: 6,
+    title: "Project Work",
+    completed: false,
+    date: new Date("2025-05-11 11:00"),
+  },
+  {
+    id: 7,
+    title: "Lunch",
+    completed: false,
+    date: new Date("2025-05-11 12:30"),
+  },
+  {
+    id: 8,
+    title: "Client Call",
+    completed: false,
+    date: new Date("2025-05-11 14:00"),
+  },
+  {
+    id: 9,
+    title: "Code Review",
+    completed: false,
+    date: new Date("2025-05-11 15:30"),
+  },
+  {
+    id: 10,
+    title: "Plan Tomorrow",
+    completed: false,
+    date: new Date("2025-05-11 17:00"),
   },
 ];
 

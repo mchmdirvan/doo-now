@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "./components/button";
 
 const tasks = [
@@ -64,11 +65,32 @@ const tasks = [
 ];
 
 export default function App() {
+  const [count, setCount] = useState(0);
+
+  function handleIncrement() {
+    // console.log("Incremented");
+    setCount(count + 1);
+  }
+
+  function handleDecrement() {
+    setCount(count - 1);
+  }
+
   return (
     <div className="bg-neutral-800 text-white min-h-screen">
       <header className="py-5 px-10">
         <h1 className="text-indigo-400 text-2xl font-bold">Doo Now</h1>
       </header>
+
+      <p>{count}</p>
+      <div className="flex gap-2">
+        <button className="bg-red-400" onClick={handleIncrement}>
+          Increment
+        </button>
+        <button className="bg-red-400" onClick={handleDecrement}>
+          Decrement
+        </button>
+      </div>
 
       <ul className="p-10 space-y-5 flex flex-col items-center">
         {tasks.map((task) => {

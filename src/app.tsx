@@ -79,7 +79,10 @@ export default function App() {
             >
               <div className="flex gap-5 items-center">
                 <input type="checkbox" name="completed" id="completed" />
-                <h2>{task.title}</h2>
+                <div>
+                  <h2>{task.title}</h2>
+                  <p>{task.date.toLocaleString()}</p>
+                </div>
               </div>
               <Button>Delete</Button>
             </li>

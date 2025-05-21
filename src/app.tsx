@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./components/button";
 
-const tasks = [
+const initialTasks = [
   {
     id: 1,
     title: "Breakfast",
@@ -66,14 +66,18 @@ const tasks = [
 
 export default function App() {
   const [count, setCount] = useState(0);
+  const [tasks, setTasks] = useState(initialTasks);
 
   function handleIncrement() {
-    // console.log("Incremented");
     setCount(count + 1);
   }
 
   function handleDecrement() {
     setCount(count - 1);
+  }
+
+  function removeTask() {
+    console.log("Hello");
   }
 
   return (
@@ -93,7 +97,7 @@ export default function App() {
       </div>
 
       <ul className="p-10 space-y-5 flex flex-col items-center">
-        {tasks.map((task) => {
+        {initialTasks.map((task) => {
           return (
             <li
               key={task.id}
@@ -106,7 +110,7 @@ export default function App() {
                   <p>{task.date.toLocaleString()}</p>
                 </div>
               </div>
-              <Button>Delete</Button>
+              <Button onClick={removeTask}>Delete</Button>
             </li>
           );
         })}

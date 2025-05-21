@@ -1,6 +1,6 @@
 export default function Button({ children }: { children: React.ReactNode }) {
   return (
-    <button className="bg-red-500 rounded-full px-2 py-1 text-xs">
+    <button className="bg-red-500 max-h-8 px-2 rounded-sm text-xs">
       {children}
     </button>
   );

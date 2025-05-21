@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Button from "./components/button";
+import TaskCard from "./components/task-card";
+import type { Task } from "./modules/type";
 
-const initialTasks = [
+const initialTasks: Task[] = [
   {
     id: 1,
     title: "Breakfast",
@@ -98,14 +100,7 @@ export default function App() {
               key={task.id}
               className="border bg-neutral-700 flex gap-5 px-5 rounded-md py-2 justify-between min-w-lg max-w-lg"
             >
-              <div className="flex gap-5 items-center">
-                <input type="checkbox" name="completed" id="completed" />
-                <div>
-                  <h2>{task.title}</h2>
-                  <p>{task.date.toLocaleString()}</p>
-                </div>
-              </div>
-              <Button onClick={() => removeTask(task.id)}>Delete</Button>
+              <TaskCard task={task} removeTask={removeTask} />
             </li>
           );
         })}

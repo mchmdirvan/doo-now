@@ -65,20 +65,22 @@ const initialTasks = [
 ];
 
 export default function App() {
-  const [count, setCount] = useState(0);
   const [tasks, setTasks] = useState(initialTasks);
-
-  function handleIncrement() {
-    setCount(count + 1);
-  }
-
-  function handleDecrement() {
-    setCount(count - 1);
-  }
 
   function removeTask(id: number) {
     const updatedTask = tasks.filter((task) => task.id !== id);
     setTasks(updatedTask);
+  }
+
+  function addTask() {
+    const newTask = {
+      id: tasks[tasks.length - 1].id + 1,
+      title: "Example Task",
+      completed: false,
+      date: new Date(),
+    };
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
   }
 
   return (
@@ -87,15 +89,7 @@ export default function App() {
         <h1 className="text-indigo-400 text-2xl font-bold">Doo Now</h1>
       </header>
 
-      <p>{count}</p>
-      <div className="flex gap-2">
-        <button className="bg-red-400" onClick={handleIncrement}>
-          Increment
-        </button>
-        <button className="bg-red-400" onClick={handleDecrement}>
-          Decrement
-        </button>
-      </div>
+      <Button onClick={addTask}>Add Tasks</Button>
 
       <ul className="p-10 space-y-5 flex flex-col items-center">
         {tasks.map((task) => {

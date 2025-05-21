@@ -17,9 +17,9 @@ const tasks = [
 
 export default function App() {
   return (
-    <div className="bg-[#1c1c1c] text-white min-h-screen">
+    <div className="bg-neutral-800 text-white min-h-screen">
       <header className="py-5 px-10">
-        <h1 className="text-[#788cde] text-2xl font-bold">Doo Now</h1>
+        <h1 className="text-indigo-400 text-2xl font-bold">Doo Now</h1>
       </header>
 
       <ul className="p-10 space-y-5">

@@ -70,12 +70,12 @@ export default function App() {
         <h1 className="text-indigo-400 text-2xl font-bold">Doo Now</h1>
       </header>
 
-      <ul className="p-10 space-y-5">
+      <ul className="p-10 space-y-5 flex flex-col items-center">
         {tasks.map((task) => {
           return (
             <li
               key={task.id}
-              className="border flex gap-5 px-5 rounded-sm py-2 justify-between"
+              className="border flex gap-5 px-5 rounded-sm py-2 justify-between min-w-lg max-w-lg"
             >
               <div className="flex gap-5 items-center">
                 <input type="checkbox" name="completed" id="completed" />

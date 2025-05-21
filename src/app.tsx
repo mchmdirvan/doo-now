@@ -75,10 +75,12 @@ export default function App() {
           return (
             <li
               key={task.id}
-              className="border flex gap-5 px-5 rounded-sm py-2"
+              className="border flex gap-5 px-5 rounded-sm py-2 justify-between"
             >
-              <input type="checkbox" name="completed" id="completed" />
-              <h2>{task.title}</h2>
+              <div className="flex gap-5 items-center">
+                <input type="checkbox" name="completed" id="completed" />
+                <h2>{task.title}</h2>
+              </div>
               <Button>Delete</Button>
             </li>
           );

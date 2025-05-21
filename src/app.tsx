@@ -75,7 +75,7 @@ export default function App() {
           return (
             <li
               key={task.id}
-              className="border flex gap-5 px-5 rounded-sm py-2 justify-between min-w-lg max-w-lg"
+              className="border bg-neutral-700 flex gap-5 px-5 rounded-md py-2 justify-between min-w-lg max-w-lg"
             >
               <div className="flex gap-5 items-center">
                 <input type="checkbox" name="completed" id="completed" />

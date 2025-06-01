@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from "./components/button";
 import TaskCard from "./components/task-card";
 import type { Task } from "./modules/type";
 
@@ -74,10 +73,16 @@ export default function App() {
     setTasks(updatedTask);
   }
 
-  function addTask() {
+  function addTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    const title = String(formData.get("title"));
+
     const newTask = {
       id: tasks[tasks.length - 1].id + 1,
-      title: "Example Task",
+      title: title,
       completed: false,
       date: new Date(),
     };
@@ -91,7 +96,11 @@ export default function App() {
         <h1 className="text-indigo-400 text-2xl font-bold">Doo Now</h1>
       </header>
 
-      <Button onClick={addTask}>Add Tasks</Button>
+      <form onSubmit={addTask} method="post">
+        <label htmlFor="Title">Task Title</label>
+        <input type="text" name="title" id="title" />
+        <button type="submit">Submit Task</button>
+      </form>
 
       <ul className="p-10 space-y-5 flex flex-col items-center">
         {tasks.map((task) => {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TaskCard from "./components/task-card";
 import type { Task } from "./modules/type";
+import { Button } from "./components/ui/button";
 
 const initialTasks: Task[] = [
   {
@@ -45,24 +46,6 @@ const initialTasks: Task[] = [
     completed: false,
     date: new Date("2025-05-11 12:30"),
   },
-  {
-    id: 8,
-    title: "Client Call",
-    completed: false,
-    date: new Date("2025-05-11 14:00"),
-  },
-  {
-    id: 9,
-    title: "Code Review",
-    completed: false,
-    date: new Date("2025-05-11 15:30"),
-  },
-  {
-    id: 10,
-    title: "Plan Tomorrow",
-    completed: false,
-    date: new Date("2025-05-11 17:00"),
-  },
 ];
 
 export default function App() {
@@ -96,10 +79,17 @@ export default function App() {
         <h1 className="text-indigo-400 text-2xl font-bold">Doo Now</h1>
       </header>
 
-      <form onSubmit={addTask} method="post">
-        <label htmlFor="Title">Task Title</label>
-        <input type="text" name="title" id="title" />
-        <button type="submit">Submit Task</button>
+      <form
+        onSubmit={addTask}
+        method="post"
+        className="border w-fit px-10 py-5 mx-10 space-y-5"
+      >
+        <div className="flex flex-col">
+          <label htmlFor="Title">Task Title</label>
+          <input className="border" type="text" name="title" id="title" />
+        </div>
+
+        <Button type="submit">Submit Task</Button>
       </form>
 
       <ul className="p-10 space-y-5 flex flex-col items-center">

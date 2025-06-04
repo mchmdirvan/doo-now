@@ -1,5 +1,5 @@
 import type { Task } from "../modules/type";
-import Button from "./button";
+import { Button } from "./ui/button";
 
 export default function TaskCard({
   task,
@@ -9,7 +9,7 @@ export default function TaskCard({
   removeTask: (id: number) => void;
 }) {
   return (
-    <div>
+    <div className=" flex w-full justify-between">
       <div className="flex gap-5 items-center">
         <input type="checkbox" name="completed" id="completed" />
         <div>
@@ -17,7 +17,15 @@ export default function TaskCard({
           <p>{task.date.toLocaleString()}</p>
         </div>
       </div>
-      <Button onClick={() => removeTask(task.id)}>Delete</Button>
+      <div>
+        <Button
+          variant="destructive"
+          className="cursor-pointer"
+          onClick={() => removeTask(task.id)}
+        >
+          Delete
+        </Button>
+      </div>
     </div>
   );
 }

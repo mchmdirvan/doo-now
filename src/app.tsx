@@ -2,6 +2,7 @@ import { useState } from "react";
 import TaskCard from "./components/task-card";
 import type { Task } from "./modules/type";
 import { Button } from "./components/ui/button";
+import { Link } from "react-router";
 
 const initialTasks: Task[] = [
   {
@@ -95,12 +96,13 @@ export default function App() {
       <ul className="p-10 space-y-5 flex flex-col items-center">
         {tasks.map((task) => {
           return (
-            <li
+            <Link
+              to={`/task/${task.id}`}
               key={task.id}
               className="border bg-neutral-700 flex gap-5 px-5 rounded-md py-2 justify-between min-w-lg max-w-lg"
             >
               <TaskCard task={task} removeTask={removeTask} />
-            </li>
+            </Link>
           );
         })}
       </ul>

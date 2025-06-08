@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { Task } from "../modules/type";
 import { Button } from "./ui/button";
 
@@ -18,6 +19,9 @@ export default function TaskCard({
         </div>
       </div>
       <div>
+        <Button asChild>
+          <Link to={`/task/${task.id}`}>View</Link>
+        </Button>
         <Button
           variant="destructive"
           className="cursor-pointer"

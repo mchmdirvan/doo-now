@@ -96,13 +96,9 @@ export default function App() {
       <ul className="p-10 space-y-5 flex flex-col items-center">
         {tasks.map((task) => {
           return (
-            <Link
-              to={`/task/${task.id}`}
-              key={task.id}
-              className="border bg-neutral-700 flex gap-5 px-5 rounded-md py-2 justify-between min-w-lg max-w-lg"
-            >
+            <li key={task.id}>
               <TaskCard task={task} removeTask={removeTask} />
-            </Link>
+            </li>
           );
         })}
       </ul>

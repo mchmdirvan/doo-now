@@ -7,7 +7,7 @@ export default function TaskCard({
   removeTask,
 }: {
   task: Task;
-  removeTask: (id: number) => void;
+  removeTask?: (id: number) => void;
 }) {
   return (
     <div className=" flex w-full justify-between">
@@ -22,13 +22,15 @@ export default function TaskCard({
         <Button asChild>
           <Link to={`/task/${task.id}`}>View</Link>
         </Button>
-        <Button
-          variant="destructive"
-          className="cursor-pointer"
-          onClick={() => removeTask(task.id)}
-        >
-          Delete
-        </Button>
+        {removeTask && (
+          <Button
+            variant="destructive"
+            className="cursor-pointer"
+            onClick={() => removeTask(task.id)}
+          >
+            Delete
+          </Button>
+        )}
       </div>
     </div>
   );

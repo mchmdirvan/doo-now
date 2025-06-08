@@ -3,6 +3,7 @@ import "./index.css";
 import { BrowserRouter, Link, Route, Routes } from "react-router";
 import { AboutRoute } from "./routes/about";
 import { HomeRoute } from "./routes/home";
+import TaskDetailRoute from "./routes/task-detail";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
     <Routes>
       <Route path="/" element={<HomeRoute />}></Route>
       <Route path="/about" element={<AboutRoute />} />
+      <Route path="/task/:taskId" element={<TaskDetailRoute />}></Route>
     </Routes>
   </BrowserRouter>
 );

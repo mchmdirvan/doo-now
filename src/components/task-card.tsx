@@ -1,23 +1,28 @@
 import { Calendar } from "lucide-react";
 import { Checkbox } from "./ui/checkbox";
+import { type Task } from "../types/task";
 
-export function TaskCard() {
+type TaskProps = {
+  task: Task;
+};
+
+export function TaskCard({ task }: TaskProps) {
   return (
-    <div className="flex gap-3 border-b pb-3">
+    <li className="flex gap-3 border-b pb-3">
       <div>
         <Checkbox id="tasks" />
       </div>
 
       <div className="space-y-1">
-        <p>Task Title</p>
-        <p className="text-xs text-neutral-500">Task Description</p>
+        <p>{task.title}</p>
+        <p className="text-xs text-neutral-500">{task.description}</p>
         <p className="flex gap-1 text-xs text-neutral-500">
-          <span className="">
+          <span>
             <Calendar size={12} />
           </span>
-          Task Date
+          {/* {taskItem.dueDate} */}
         </p>
       </div>
-    </div>
+    </li>
   );
 }

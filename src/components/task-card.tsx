@@ -12,18 +12,26 @@ import { Button } from "./ui/button";
 type TaskProps = {
   task: Task;
   deleteTask: () => void;
+  toogleIsCompleted: () => void;
 };
 
-export function TaskCard({ task, deleteTask }: TaskProps) {
+export function TaskCard({ task, deleteTask, toogleIsCompleted }: TaskProps) {
   return (
     <li className="flex justify-between border-b py-3">
       <div className="flex gap-3">
         <div>
-          <Checkbox id="tasks" />
+          <Checkbox
+            id="isCompleted"
+            name="isCompleted"
+            defaultChecked={task.isCompleted}
+            onClick={toogleIsCompleted}
+          />
         </div>
 
         <div className="space-y-1">
-          <p>{task.title}</p>
+          <p className={`${task.isCompleted ? "line-through" : ""}`}>
+            {task.title}
+          </p>
           <p className="text-xs text-neutral-500">{task.description}</p>
           <p className="flex gap-1 text-xs text-neutral-500">
             <span>

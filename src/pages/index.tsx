@@ -46,6 +46,20 @@ export function Index() {
     setTasks(filteredTask);
   }
 
+  function toogleIsCompleted(id: number) {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return {
+          ...task,
+          isCompleted: !task.isCompleted,
+        };
+      }
+      return task;
+    });
+
+    setTasks(updatedTasks);
+  }
+
   return (
     <Layout>
       <section className="mx-auto max-w-3xl py-10">
@@ -57,6 +71,7 @@ export function Index() {
               key={task.id}
               task={task}
               deleteTask={() => deleteTask(task.id)}
+              toogleIsCompleted={() => toogleIsCompleted(task.id)}
             />
           ))}
         </ul>

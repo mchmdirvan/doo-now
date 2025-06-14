@@ -1,19 +1,32 @@
-import { Plus } from "lucide-react";
+import { Plus as PlusIcon, Calendar as CalendarIcon } from "lucide-react";
+import { format } from "date-fns";
 import { useState } from "react";
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 import { initialialTask } from "@/data/initial-task";
 import { Layout } from "@/components/layouts/layout";
+import { Calendar } from "@/components/ui/calendar";
 import { TaskCard } from "@/components/task-card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export function Index() {
+  const [renderFormTask, setRenderFormTask] = useState(false);
   const [tasks, setTasks] = useState(initialialTask);
+  const [date, setDate] = useState<Date>();
+
+  function addTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    console.log("Hello");
+  }
 
   function deleteTask(id: number) {
-    const filteredTask = tasks.filter((task) => {
-      return task.id !== id;
-    });
-
+    const filteredTask = tasks.filter((task) => task.id !== id);
     setTasks(filteredTask);
   }
 
@@ -32,10 +45,67 @@ export function Index() {
           ))}
         </ul>
 
-        <Button variant="ghost" size="sm" className="mt-2">
-          <Plus />
-          Add Task
-        </Button>
+        {renderFormTask ? (
+          <section className="rounded-xl border px-2 py-2">
+            <form method="post" onSubmit={addTask} className="flex flex-col">
+              <Input
+                autoFocus
+                id="title"
+                name="title"
+                placeholder="Title"
+                className="font-semibold"
+              />
+
+              <Input
+                id="description"
+                name="description"
+                placeholder="Description"
+                className="text-xs placeholder:text-xs"
+              />
+
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    data-empty={!date}
+                    className="data-[empty=true]:text-muted-foreground justify-start border-none text-left text-xs shadow-none"
+                  >
+                    <CalendarIcon />
+                    {date ? format(date, "PPP") : <span>Pick a date</span>}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar mode="single" selected={date} onSelect={setDate} />
+                </PopoverContent>
+              </Popover>
+
+              <div className="border"></div>
+
+              <div className="mt-2 space-x-2 self-end">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setRenderFormTask(false)}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" size="sm">
+                  Add Task
+                </Button>
+              </div>
+            </form>
+          </section>
+        ) : (
+          <Button
+            variant="ghost"
+            size="sm"
+            className="mt-2"
+            onClick={() => setRenderFormTask(true)}
+          >
+            <PlusIcon />
+            Add Task
+          </Button>
+        )}
       </section>
     </Layout>
   );

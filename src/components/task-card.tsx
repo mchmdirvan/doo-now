@@ -10,7 +10,7 @@ type TaskProps = {
 
 export function TaskCard({ task }: TaskProps) {
   return (
-    <li className="flex justify-between border-b pb-3">
+    <li className="flex justify-between border-b py-3">
       <div className="flex gap-3">
         <div>
           <Checkbox id="tasks" />

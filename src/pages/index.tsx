@@ -37,6 +37,8 @@ export function Index() {
 
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
+
+    event.currentTarget.reset();
   }
 
   function deleteTask(id: number) {

@@ -1,4 +1,9 @@
-import { Command, Info, ListChecks, PlusCircle } from "lucide-react";
+import {
+  Command as CommandIcon,
+  Info as InfoIcon,
+  ListChecks as ListChecksIcon,
+  PlusCircle as PlusCircleIcon,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -22,7 +27,7 @@ const navMain = [
       {
         title: "Introduction",
         url: "#",
-        icon: Info,
+        icon: InfoIcon,
       },
     ],
   },
@@ -33,12 +38,12 @@ const navMain = [
       {
         title: "Add Tasks",
         url: "#",
-        icon: PlusCircle,
+        icon: PlusCircleIcon,
       },
       {
         title: "Tasks",
         url: "#",
-        icon: ListChecks,
+        icon: ListChecksIcon,
       },
     ],
   },
@@ -53,7 +58,7 @@ export function AppSidebar() {
             <SidebarMenuButton size="lg" asChild>
               <a href="#" className="mb-2">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <Command className="size-4" />
+                  <CommandIcon className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">Doo Now</span>

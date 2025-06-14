@@ -1,4 +1,9 @@
-import { Calendar, Eye, PencilIcon, Trash2Icon } from "lucide-react";
+import {
+  Calendar as CalendarIcon,
+  Eye as EyeIcon,
+  PencilIcon,
+  Trash2Icon,
+} from "lucide-react";
 
 import { type Task } from "../types/task";
 import { Checkbox } from "./ui/checkbox";
@@ -22,7 +27,7 @@ export function TaskCard({ task, deleteTask }: TaskProps) {
           <p className="text-xs text-neutral-500">{task.description}</p>
           <p className="flex gap-1 text-xs text-neutral-500">
             <span>
-              <Calendar size={12} />
+              <CalendarIcon size={12} />
             </span>
             {task.dueDate.toLocaleString()}
           </p>
@@ -31,7 +36,7 @@ export function TaskCard({ task, deleteTask }: TaskProps) {
 
       <div className="space-x-2">
         <Button variant="secondary" size="icon" className="size-8">
-          <Eye />
+          <EyeIcon />
         </Button>
         <Button variant="secondary" size="icon" className="size-8">
           <PencilIcon />

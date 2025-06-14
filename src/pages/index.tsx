@@ -1,9 +1,9 @@
-import { Layout } from "@/components/layouts/layout";
-import { TaskCard } from "@/components/task-card";
-import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
 import { initialialTask } from "@/data/initial-task";
+import { Layout } from "@/components/layouts/layout";
+import { TaskCard } from "@/components/task-card";
+import { Button } from "@/components/ui/button";
 
 export function Index() {
   return (

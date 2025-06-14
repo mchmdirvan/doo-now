@@ -1,6 +1,7 @@
 import { Calendar } from "lucide-react";
-import { Checkbox } from "./ui/checkbox";
+
 import { type Task } from "../types/task";
+import { Checkbox } from "./ui/checkbox";
 
 type TaskProps = {
   task: Task;

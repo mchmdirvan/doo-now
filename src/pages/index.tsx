@@ -17,8 +17,8 @@ import { Input } from "@/components/ui/input";
 
 export function Index() {
   const [renderFormTask, setRenderFormTask] = useState(false);
+  const [openDateInput, setOpenDateInput] = useState(false);
   const [tasks, setTasks] = useState(initialialTask);
-  const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date>();
 
   function addTask(event: React.FormEvent<HTMLFormElement>) {
@@ -95,7 +95,7 @@ export function Index() {
                 className="text-xs placeholder:text-xs"
               />
 
-              <Popover open={open} onOpenChange={setOpen}>
+              <Popover open={openDateInput} onOpenChange={setOpenDateInput}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -117,7 +117,7 @@ export function Index() {
                     captionLayout="dropdown"
                     onSelect={(date) => {
                       setDate(date);
-                      setOpen(false);
+                      setOpenDateInput(false);
                     }}
                   />
                 </PopoverContent>

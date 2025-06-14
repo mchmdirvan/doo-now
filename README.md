@@ -1,54 +1,70 @@
-# React + TypeScript + Vite
+# Doo Now
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<!-- ![header](assets/images/header.png) -->
 
-Currently, two official plugins are available:
+> 📇 **Doo Now** - A simple task management application
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Doo Now is an application designed to store and manage tasks. It serves as a digital task manager, allowing you to maintain your personal tasks.
 
-## Expanding the ESLint configuration
+## Links
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🌍 URL: [https://doo-now.vercel.app/](https://doo-now.vercel.app/)
+- 📦 Repository: <https://github.com/mchmdirvan/doo-now>
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Features
+
+- ➕ Create Task
+- 📖 Read Tasks
+- ✏️ Update Task
+- 🗑️ Delete Task
+- 👤 Show Task Details
+- 🔍 Search Tasks
+
+## Tech Stack
+
+- React Typescript
+- Tailwind CSS
+- Shadcn UI
+- React Router
+- React Hook Form
+- Zod
+
+## Flowchart
+
+```mermaid
+flowchart TD
+    A[Start Application] --> B{Check Local Storage}
+    B -->|Exists| C[Load Task from Local Storage]
+    B -->|Empty/Not Exists| D[Initialize Default Data]
+    D --> E[Save Initial Data to Local Storage]
+    E --> F[Display Task List]
+    C --> F
+
+    F --> G{User Action}
+
+    G -->|Create New| H[Show Create Form]
+    H --> I[Fill Task Details]
+    I --> J[Add to Task Array]
+    J --> K[Save to Local Storage]
+    K --> F
+
+    G -->|Edit Task| L[Show Edit Form with Data]
+    L --> M[Modify Task Details]
+    M --> N[Update Task Array]
+    N --> K[Save to Local Storage]
+    K --> F
+
+    G -->|Delete Task| P[Remove from Task Array]
+    P --> K[Save to Local Storage]
+    K --> F
+
+    G -->|Search| R[Filter Task Display]
+    R --> F
+
+    G -->|View Task| S[Show Task Details]
+    S --> F
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## References
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Todoist: [https://todoist.com/](https://todoist.com/)

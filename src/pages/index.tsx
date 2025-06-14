@@ -6,6 +6,10 @@ import { TaskCard } from "@/components/task-card";
 import { Button } from "@/components/ui/button";
 
 export function Index() {
+  function deleteTask(id: number) {
+    console.log(`Hello ${id}`);
+  }
+
   return (
     <Layout>
       <section className="mx-auto max-w-3xl py-10">
@@ -13,7 +17,11 @@ export function Index() {
 
         <ul>
           {initialialTask.map((task) => (
-            <TaskCard key={task.id} task={task} />
+            <TaskCard
+              key={task.id}
+              task={task}
+              deleteTask={() => deleteTask(task.id)}
+            />
           ))}
         </ul>
 

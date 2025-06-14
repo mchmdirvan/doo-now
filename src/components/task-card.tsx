@@ -6,9 +6,10 @@ import { Button } from "./ui/button";
 
 type TaskProps = {
   task: Task;
+  deleteTask: () => void;
 };
 
-export function TaskCard({ task }: TaskProps) {
+export function TaskCard({ task, deleteTask }: TaskProps) {
   return (
     <li className="flex justify-between border-b py-3">
       <div className="flex gap-3">
@@ -35,7 +36,12 @@ export function TaskCard({ task }: TaskProps) {
         <Button variant="secondary" size="icon" className="size-8">
           <PencilIcon />
         </Button>
-        <Button variant="destructive" size="icon" className="size-8">
+        <Button
+          onClick={deleteTask}
+          variant="destructive"
+          size="icon"
+          className="size-8"
+        >
           <Trash2Icon />
         </Button>
       </div>

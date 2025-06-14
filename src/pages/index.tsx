@@ -22,7 +22,21 @@ export function Index() {
 
   function addTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log("Hello");
+
+    const formData = new FormData(event.currentTarget);
+    const title = formData.get("title");
+    const description = formData.get("description");
+
+    const newTask = {
+      id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1,
+      title: title as string,
+      description: description as string,
+      isCompleted: false,
+      dueDate: date as Date,
+    };
+
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
   }
 
   function deleteTask(id: number) {

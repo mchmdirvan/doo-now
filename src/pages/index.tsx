@@ -1,16 +1,20 @@
 import { Plus } from "lucide-react";
+import { useState } from "react";
 
 import { initialialTask } from "@/data/initial-task";
 import { Layout } from "@/components/layouts/layout";
 import { TaskCard } from "@/components/task-card";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 export function Index() {
   const [tasks, setTasks] = useState(initialialTask);
 
   function deleteTask(id: number) {
-    console.log(`Hello ${id}`);
+    const filteredTask = tasks.filter((task) => {
+      return task.id !== id;
+    });
+
+    setTasks(filteredTask);
   }
 
   return (

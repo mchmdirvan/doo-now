@@ -67,7 +67,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         {navMain.map((item) => (
-          <SidebarGroup>
+          <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>

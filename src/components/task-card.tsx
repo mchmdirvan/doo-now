@@ -21,7 +21,7 @@ export function TaskCard({ task }: TaskProps) {
           <span>
             <Calendar size={12} />
           </span>
-          {/* {taskItem.dueDate} */}
+          {task.dueDate.toLocaleString()}
         </p>
       </div>
     </li>

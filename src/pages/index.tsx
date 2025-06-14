@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 export function Index() {
   const [renderFormTask, setRenderFormTask] = useState(false);
   const [tasks, setTasks] = useState(initialialTask);
+  const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date>();
 
   function addTask(event: React.FormEvent<HTMLFormElement>) {
@@ -94,10 +95,11 @@ export function Index() {
                 className="text-xs placeholder:text-xs"
               />
 
-              <Popover>
+              <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
+                    id="dueDate"
                     data-empty={!date}
                     className="data-[empty=true]:text-muted-foreground justify-start border-none text-left text-xs shadow-none"
                   >
@@ -105,8 +107,19 @@ export function Index() {
                     {date ? format(date, "PPP") : <span>Pick a date</span>}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar mode="single" selected={date} onSelect={setDate} />
+                <PopoverContent
+                  className="w-auto overflow-hidden p-0"
+                  align="start"
+                >
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    captionLayout="dropdown"
+                    onSelect={(date) => {
+                      setDate(date);
+                      setOpen(false);
+                    }}
+                  />
                 </PopoverContent>
               </Popover>
 

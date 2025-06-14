@@ -4,8 +4,11 @@ import { initialialTask } from "@/data/initial-task";
 import { Layout } from "@/components/layouts/layout";
 import { TaskCard } from "@/components/task-card";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export function Index() {
+  const [tasks, setTasks] = useState(initialialTask);
+
   function deleteTask(id: number) {
     console.log(`Hello ${id}`);
   }
@@ -16,7 +19,7 @@ export function Index() {
         <h1 className="pb-5 text-2xl font-bold">Tasks</h1>
 
         <ul>
-          {initialialTask.map((task) => (
+          {tasks.map((task) => (
             <TaskCard
               key={task.id}
               task={task}

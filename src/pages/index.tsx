@@ -49,11 +49,11 @@ export function Index() {
       isCompleted: false,
       dueDate: data.dueDate,
     };
-
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
 
     reset();
+    setRenderFormTask(false);
   };
 
   function deleteTask(id: number) {

@@ -1,13 +1,15 @@
 import { Plus as PlusIcon, Calendar as CalendarIcon } from "lucide-react";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useState } from "react";
+import * as z from "zod";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
 import { initialialTask } from "@/data/initial-task";
 import { Layout } from "@/components/layouts/layout";
 import { Calendar } from "@/components/ui/calendar";
@@ -15,23 +17,33 @@ import { TaskCard } from "@/components/task-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+const schema = z.object({
+  title: z.string().min(1, "Title is Required"),
+  description: z.string(),
+});
+
+type Schema = z.infer<typeof schema>;
+
 export function Index() {
   const [renderFormTask, setRenderFormTask] = useState(false);
   const [openDateInput, setOpenDateInput] = useState(false);
   const [tasks, setTasks] = useState(initialialTask);
   const [date, setDate] = useState<Date>();
 
-  function addTask(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
 
-    const formData = new FormData(event.currentTarget);
-    const title = formData.get("title");
-    const description = formData.get("description");
-
+  const addTask: SubmitHandler<Schema> = (data) => {
     const newTask = {
       id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1,
-      title: title as string,
-      description: description as string,
+      title: data.title,
+      description: data.description,
       isCompleted: false,
       dueDate: date as Date,
     };
@@ -39,8 +51,8 @@ export function Index() {
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
 
-    event.currentTarget.reset();
-  }
+    reset();
+  };
 
   function deleteTask(id: number) {
     const filteredTask = tasks.filter((task) => task.id !== id);
@@ -79,20 +91,26 @@ export function Index() {
 
         {renderFormTask ? (
           <section className="rounded-xl border px-2 py-2">
-            <form method="post" onSubmit={addTask} className="flex flex-col">
+            <form
+              onSubmit={handleSubmit((data) => {
+                addTask(data);
+              })}
+              className="flex flex-col"
+            >
               <Input
                 autoFocus
                 id="title"
-                name="title"
                 placeholder="Title"
                 className="font-semibold"
+                {...register("title")}
               />
+              {errors.title && <p>{errors.title.message}</p>}
 
               <Input
                 id="description"
-                name="description"
                 placeholder="Description"
                 className="text-xs placeholder:text-xs"
+                {...register("description")}
               />
 
               <Popover open={openDateInput} onOpenChange={setOpenDateInput}>

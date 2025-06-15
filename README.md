@@ -1,6 +1,6 @@
 # Doo Now
 
-<!-- ![header](assets/images/header.png) -->
+![header](public/header.png)
 
 > 📇 **Doo Now** - A simple task management application
 

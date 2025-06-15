@@ -1,5 +1,5 @@
 import { Plus as PlusIcon, Calendar as CalendarIcon } from "lucide-react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useState } from "react";
@@ -21,6 +21,7 @@ import { Badge } from "@/components/ui/badge";
 const schema = z.object({
   title: z.string().min(1, "Title is Required"),
   description: z.string(),
+  dueDate: z.date(),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -29,14 +30,14 @@ export function Index() {
   const [renderFormTask, setRenderFormTask] = useState(false);
   const [openDateInput, setOpenDateInput] = useState(false);
   const [tasks, setTasks] = useState(initialialTask);
-  const [date, setDate] = useState<Date>();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+    control,
+  } = useForm<Schema>({
     resolver: zodResolver(schema),
   });
 
@@ -46,7 +47,7 @@ export function Index() {
       title: data.title,
       description: data.description,
       isCompleted: false,
-      dueDate: date as Date,
+      dueDate: data.dueDate,
     };
 
     const updatedTasks = [...tasks, newTask];
@@ -115,34 +116,58 @@ export function Index() {
                 className="text-xs placeholder:text-xs"
                 {...register("description")}
               />
+              {errors.description && (
+                <Badge variant="destructive">
+                  {errors.description.message}
+                </Badge>
+              )}
 
-              <Popover open={openDateInput} onOpenChange={setOpenDateInput}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    id="dueDate"
-                    data-empty={!date}
-                    className="data-[empty=true]:text-muted-foreground justify-start border-none text-left text-xs shadow-none"
-                  >
-                    <CalendarIcon />
-                    {date ? format(date, "PPP") : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent
-                  className="w-auto overflow-hidden p-0"
-                  align="start"
-                >
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    captionLayout="dropdown"
-                    onSelect={(date) => {
-                      setDate(date);
-                      setOpenDateInput(false);
-                    }}
-                  />
-                </PopoverContent>
-              </Popover>
+              <Controller
+                name="dueDate"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <Popover
+                      open={openDateInput}
+                      onOpenChange={setOpenDateInput}
+                    >
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          data-empty={!field.value}
+                          className="data-[empty=true]:text-muted-foreground justify-start border-none text-left text-xs shadow-none"
+                        >
+                          <CalendarIcon />
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        className="w-auto overflow-hidden p-0"
+                        align="start"
+                      >
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          captionLayout="dropdown"
+                          onSelect={(date) => {
+                            field.onChange(date);
+                            setOpenDateInput(false);
+                          }}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    {errors.dueDate && (
+                      <Badge variant="destructive">
+                        {errors.dueDate.message}
+                      </Badge>
+                    )}
+                  </>
+                )}
+              />
 
               <div className="border"></div>
 

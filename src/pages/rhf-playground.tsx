@@ -1,4 +1,5 @@
 import { Plus as PlusIcon, Calendar as CalendarIcon } from "lucide-react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { format } from "date-fns";
 import { useState } from "react";
 
@@ -14,6 +15,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { TaskCard } from "@/components/task-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import type { Task } from "@/types/task";
 
 export function RhfPlayground() {
   const [renderFormTask, setRenderFormTask] = useState(false);
@@ -21,26 +23,20 @@ export function RhfPlayground() {
   const [tasks, setTasks] = useState(initialialTask);
   const [date, setDate] = useState<Date>();
 
-  function addTask(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const { register, handleSubmit } = useForm<Task>();
 
-    const formData = new FormData(event.currentTarget);
-    const title = formData.get("title");
-    const description = formData.get("description");
-
+  const addTask: SubmitHandler<Task> = (data) => {
     const newTask = {
       id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1,
-      title: title as string,
-      description: description as string,
+      title: data.title,
+      description: data.description,
       isCompleted: false,
       dueDate: date as Date,
     };
 
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
-
-    event.currentTarget.reset();
-  }
+  };
 
   function deleteTask(id: number) {
     const filteredTask = tasks.filter((task) => task.id !== id);
@@ -79,20 +75,20 @@ export function RhfPlayground() {
 
         {renderFormTask ? (
           <section className="rounded-xl border px-2 py-2">
-            <form method="post" onSubmit={addTask} className="flex flex-col">
+            <form onSubmit={handleSubmit(addTask)} className="flex flex-col">
               <Input
                 autoFocus
                 id="title"
-                name="title"
                 placeholder="Title"
                 className="font-semibold"
+                {...register("title")}
               />
 
               <Input
                 id="description"
-                name="description"
                 placeholder="Description"
                 className="text-xs placeholder:text-xs"
+                {...register("description")}
               />
 
               <Popover open={openDateInput} onOpenChange={setOpenDateInput}>

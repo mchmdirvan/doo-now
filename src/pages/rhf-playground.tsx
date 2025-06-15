@@ -23,7 +23,11 @@ export function RhfPlayground() {
   const [tasks, setTasks] = useState(initialialTask);
   const [date, setDate] = useState<Date>();
 
-  const { register, handleSubmit } = useForm<Task>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Task>();
 
   const addTask: SubmitHandler<Task> = (data) => {
     const newTask = {
@@ -81,8 +85,9 @@ export function RhfPlayground() {
                 id="title"
                 placeholder="Title"
                 className="font-semibold"
-                {...register("title")}
+                {...register("title", { required: "Fill the form" })}
               />
+              {errors.title && <p>{errors.title.message}</p>}
 
               <Input
                 id="description"

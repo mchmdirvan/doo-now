@@ -1,3 +1,5 @@
+import { Layout } from "@/components/layouts/layout";
+
 export function Introduction() {
-  return <div>Introduction</div>;
+  return <Layout>Coming Soon...</Layout>;
 }

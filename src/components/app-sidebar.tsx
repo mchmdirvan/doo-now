@@ -2,7 +2,6 @@ import {
   Command as CommandIcon,
   Info as InfoIcon,
   ListChecks as ListChecksIcon,
-  PlusCircle as PlusCircleIcon,
 } from "lucide-react";
 
 import {
@@ -36,11 +35,6 @@ const navMain = [
     title: "Application",
     url: "#",
     items: [
-      {
-        title: "Add Tasks",
-        url: "/",
-        icon: PlusCircleIcon,
-      },
       {
         title: "Tasks",
         url: "/",

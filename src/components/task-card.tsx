@@ -5,10 +5,10 @@ import {
   Trash2Icon,
 } from "lucide-react";
 
-import { type Task } from "../types/task";
 import { Checkbox } from "./ui/checkbox";
 import { Button } from "./ui/button";
 import { Link } from "react-router";
+import type { Task } from "@/modules/task/type";
 
 type TaskProps = {
   task: Task;

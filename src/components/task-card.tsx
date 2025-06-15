@@ -1,37 +1,66 @@
-import { Link } from "react-router";
-import type { Task } from "../modules/type";
-import { Button } from "./ui/button";
+import {
+  Calendar as CalendarIcon,
+  Eye as EyeIcon,
+  PencilIcon,
+  Trash2Icon,
+} from "lucide-react";
 
-export default function TaskCard({
-  task,
-  removeTask,
-}: {
+import { type Task } from "../types/task";
+import { Checkbox } from "./ui/checkbox";
+import { Button } from "./ui/button";
+import { Link } from "react-router";
+
+type TaskProps = {
   task: Task;
-  removeTask?: (id: number) => void;
-}) {
+  deleteTask: () => void;
+  toogleIsCompleted: () => void;
+};
+
+export function TaskCard({ task, deleteTask, toogleIsCompleted }: TaskProps) {
   return (
-    <div className=" flex w-full justify-between">
-      <div className="flex gap-5 items-center">
-        <input type="checkbox" name="completed" id="completed" />
+    <li className="flex justify-between border-b py-3">
+      <div className="flex gap-3">
         <div>
-          <h2>{task.title}</h2>
-          <p>{task.date.toLocaleString()}</p>
+          <Checkbox
+            id="isCompleted"
+            name="isCompleted"
+            defaultChecked={task.isCompleted}
+            onClick={toogleIsCompleted}
+          />
+        </div>
+
+        <div className="space-y-1">
+          <p className={`${task.isCompleted ? "line-through" : ""}`}>
+            {task.title}
+          </p>
+          <p className="text-xs text-neutral-500">{task.description}</p>
+          <p className="flex gap-1 text-xs text-neutral-500">
+            <span>
+              <CalendarIcon size={12} />
+            </span>
+            {task.dueDate.toLocaleString()}
+          </p>
         </div>
       </div>
-      <div>
-        <Button asChild>
-          <Link to={`/task/${task.id}`}>View</Link>
-        </Button>
-        {removeTask && (
-          <Button
-            variant="destructive"
-            className="cursor-pointer"
-            onClick={() => removeTask(task.id)}
-          >
-            Delete
+
+      <div className="space-x-2">
+        <Link to={`/tasks/${task.id}`}>
+          <Button variant="secondary" size="icon" className="size-8">
+            <EyeIcon />
           </Button>
-        )}
+        </Link>
+        <Button variant="secondary" size="icon" className="size-8">
+          <PencilIcon />
+        </Button>
+        <Button
+          onClick={deleteTask}
+          variant="destructive"
+          size="icon"
+          className="size-8"
+        >
+          <Trash2Icon />
+        </Button>
       </div>
-    </div>
+    </li>
   );
 }

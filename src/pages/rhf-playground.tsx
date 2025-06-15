@@ -1,21 +1,28 @@
 import { Plus as PlusIcon, Calendar as CalendarIcon } from "lucide-react";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useState } from "react";
+import * as z from "zod";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
 import { initialialTask } from "@/data/initial-task";
 import { Layout } from "@/components/layouts/layout";
 import { Calendar } from "@/components/ui/calendar";
 import { TaskCard } from "@/components/task-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import type { Task } from "@/types/task";
+
+const schema = z.object({
+  title: z.string().min(1, "Title is Required"),
+  description: z.string(),
+});
+
+type Schema = z.infer<typeof schema>;
 
 export function RhfPlayground() {
   const [renderFormTask, setRenderFormTask] = useState(false);
@@ -27,9 +34,11 @@ export function RhfPlayground() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Task>();
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
 
-  const addTask: SubmitHandler<Task> = (data) => {
+  const addTask: SubmitHandler<Schema> = (data) => {
     const newTask = {
       id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1,
       title: data.title,
@@ -79,13 +88,18 @@ export function RhfPlayground() {
 
         {renderFormTask ? (
           <section className="rounded-xl border px-2 py-2">
-            <form onSubmit={handleSubmit(addTask)} className="flex flex-col">
+            <form
+              onSubmit={handleSubmit((data) => {
+                addTask(data);
+              })}
+              className="flex flex-col"
+            >
               <Input
                 autoFocus
                 id="title"
                 placeholder="Title"
                 className="font-semibold"
-                {...register("title", { required: "Fill the form" })}
+                {...register("title")}
               />
               {errors.title && <p>{errors.title.message}</p>}
 

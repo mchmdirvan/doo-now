@@ -1,6 +1,6 @@
-import type { Task } from "@/types/task";
+import type { Task } from "@/modules/task/type";
 
-export const initialialTask: Task[] = [
+export const initialTaskData: Task[] = [
   {
     id: 1,
     title: "Welcome to your task manager! 👋",

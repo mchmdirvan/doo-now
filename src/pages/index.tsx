@@ -3,33 +3,26 @@ import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useState } from "react";
-import * as z from "zod";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { initialialTask } from "@/data/initial-task";
+import { initialTaskData } from "@/modules/task/data";
 import { Layout } from "@/components/layouts/layout";
 import { Calendar } from "@/components/ui/calendar";
 import { TaskCard } from "@/components/task-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-
-const schema = z.object({
-  title: z.string().min(1, "Title is Required"),
-  description: z.string(),
-  dueDate: z.date(),
-});
-
-type Schema = z.infer<typeof schema>;
+import { AddTaskSchema } from "@/modules/task/schema";
+import type { AddTask } from "@/modules/task/type";
 
 export function Index() {
   const [renderFormTask, setRenderFormTask] = useState(false);
   const [openDateInput, setOpenDateInput] = useState(false);
-  const [tasks, setTasks] = useState(initialialTask);
+  const [tasks, setTasks] = useState(initialTaskData);
 
   const {
     register,
@@ -37,11 +30,11 @@ export function Index() {
     formState: { errors },
     reset,
     control,
-  } = useForm<Schema>({
-    resolver: zodResolver(schema),
+  } = useForm({
+    resolver: zodResolver(AddTaskSchema),
   });
 
-  const addTask: SubmitHandler<Schema> = (data) => {
+  const addTask: SubmitHandler<AddTask> = (data) => {
     const newTask = {
       id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1,
       title: data.title,

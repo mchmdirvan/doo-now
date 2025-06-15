@@ -1,5 +1,5 @@
-import { initialialTask } from "@/data/initial-task";
-import type { Task } from "@/types/task";
+import { initialTaskData } from "@/modules/task/data";
+import type { Task } from "@/modules/task/type";
 
 export function saveTasks(tasks: Task[]) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -8,8 +8,8 @@ export function saveTasks(tasks: Task[]) {
 export function loadTasks() {
   const tasks = localStorage.getItem("tasks");
   if (!tasks) {
-    saveTasks(initialialTask);
-    return initialialTask;
+    saveTasks(initialTaskData);
+    return initialTaskData;
   }
   return JSON.parse(tasks);
 }

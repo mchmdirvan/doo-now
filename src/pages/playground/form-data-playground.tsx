@@ -8,7 +8,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { initialialTask } from "@/data/initial-task";
+import { initialTaskData } from "@/modules/task/data";
 import { Layout } from "@/components/layouts/layout";
 import { Calendar } from "@/components/ui/calendar";
 import { TaskCard } from "@/components/task-card";
@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 export function FormDataPlayground() {
   const [renderFormTask, setRenderFormTask] = useState(false);
   const [openDateInput, setOpenDateInput] = useState(false);
-  const [tasks, setTasks] = useState(initialialTask);
+  const [tasks, setTasks] = useState(initialTaskData);
   const [date, setDate] = useState<Date>();
 
   function addTask(event: React.FormEvent<HTMLFormElement>) {

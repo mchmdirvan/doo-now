@@ -34,6 +34,7 @@ export function RhfPlayground() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(schema),
   });
@@ -49,6 +50,8 @@ export function RhfPlayground() {
 
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
+
+    reset();
   };
 
   function deleteTask(id: number) {

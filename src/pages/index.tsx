@@ -16,6 +16,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { TaskCard } from "@/components/task-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 
 const schema = z.object({
   title: z.string().min(1, "Title is Required"),
@@ -104,7 +105,9 @@ export function Index() {
                 className="font-semibold"
                 {...register("title")}
               />
-              {errors.title && <p>{errors.title.message}</p>}
+              {errors.title && (
+                <Badge variant="destructive">{errors.title.message}</Badge>
+              )}
 
               <Input
                 id="description"

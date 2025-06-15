@@ -17,6 +17,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { SearchForm } from "./search-form";
+import { Link } from "react-router";
 
 // Menu items.
 const navMain = [
@@ -26,7 +27,7 @@ const navMain = [
     items: [
       {
         title: "Introduction",
-        url: "#",
+        url: "/introduction",
         icon: InfoIcon,
       },
     ],
@@ -37,12 +38,12 @@ const navMain = [
     items: [
       {
         title: "Add Tasks",
-        url: "#",
+        url: "/",
         icon: PlusCircleIcon,
       },
       {
         title: "Tasks",
-        url: "#",
+        url: "/",
         icon: ListChecksIcon,
       },
     ],
@@ -79,10 +80,10 @@ export function AppSidebar() {
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
-                      <a href={item.url}>
+                      <Link to={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}

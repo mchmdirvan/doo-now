@@ -13,10 +13,16 @@ import { Link } from "react-router";
 type TaskProps = {
   task: Task;
   deleteTask: () => void;
+  updateTask: () => void;
   toogleIsCompleted: () => void;
 };
 
-export function TaskCard({ task, deleteTask, toogleIsCompleted }: TaskProps) {
+export function TaskCard({
+  task,
+  deleteTask,
+  updateTask,
+  toogleIsCompleted,
+}: TaskProps) {
   return (
     <li className="flex justify-between border-b py-3">
       <div className="flex gap-3">
@@ -49,7 +55,12 @@ export function TaskCard({ task, deleteTask, toogleIsCompleted }: TaskProps) {
             <EyeIcon />
           </Button>
         </Link>
-        <Button variant="secondary" size="icon" className="size-8">
+        <Button
+          onClick={updateTask}
+          variant="secondary"
+          size="icon"
+          className="size-8"
+        >
           <PencilIcon />
         </Button>
         <Button

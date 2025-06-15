@@ -61,6 +61,11 @@ export function Index() {
     setTasks(filteredTask);
   }
 
+  function updateTask(id: number) {
+    setRenderFormTask(true);
+    console.log(id);
+  }
+
   function toogleIsCompleted(id: number) {
     const updatedTasks = tasks.map((task) => {
       if (task.id === id) {
@@ -86,6 +91,7 @@ export function Index() {
               key={task.id}
               task={task}
               deleteTask={() => deleteTask(task.id)}
+              updateTask={() => updateTask(task.id)}
               toogleIsCompleted={() => toogleIsCompleted(task.id)}
             />
           ))}

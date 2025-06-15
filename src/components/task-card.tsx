@@ -8,6 +8,7 @@ import {
 import { type Task } from "../types/task";
 import { Checkbox } from "./ui/checkbox";
 import { Button } from "./ui/button";
+import { Link } from "react-router";
 
 type TaskProps = {
   task: Task;
@@ -43,9 +44,11 @@ export function TaskCard({ task, deleteTask, toogleIsCompleted }: TaskProps) {
       </div>
 
       <div className="space-x-2">
-        <Button variant="secondary" size="icon" className="size-8">
-          <EyeIcon />
-        </Button>
+        <Link to={`/tasks/${task.id}`}>
+          <Button variant="secondary" size="icon" className="size-8">
+            <EyeIcon />
+          </Button>
+        </Link>
         <Button variant="secondary" size="icon" className="size-8">
           <PencilIcon />
         </Button>

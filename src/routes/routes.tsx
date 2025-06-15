@@ -1,4 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
+
+import { Introduction } from "@/pages/introduction";
 import { Index } from "@/pages";
 
 function Router() {
@@ -6,6 +8,10 @@ function Router() {
     {
       path: "/",
       element: <Index />,
+    },
+    {
+      path: "/introduction",
+      element: <Introduction />,
     },
     {
       path: "*",
